@@ -14,7 +14,7 @@ int max(int *a, int l)
     return m;
 }
 
-int *removeDuplicates(int *a, int n)
+void removeDuplicates(int *a, int n)
 {
     int *c = new int[n];
     int m = max(a, n);
@@ -28,17 +28,32 @@ int *removeDuplicates(int *a, int n)
     {
         b[a[i]]++;
     }
+    //  * pushing the elements that appear once to the left of array c
+    int length = 0;
     for (int i = 0; i < m + 1; i++)
     {
-        if (b[i] > 0)
+        if (b[i] == 1)
         {
-            c[i] = i;
+            c[length++] = i;
         }
     }
+    //  * pushing the elements that appear more than once to the remainder of array c
+    for (int i = 0; i < m + 1; i++)
+    {
+        if (b[i] > 0 && b[i] != 1)
+        {
+            c[length++] = i;
+        }
+    }
+    // * displaying the computed array
+    for (int i = 0; i < length; i++)
+    {
+        cout << c[i] << " ";
+    }
     delete[] b;
-    return c;
+    delete[] c;
 }
-// ! to be fixed
+
 int main()
 {
     int n;
@@ -48,11 +63,6 @@ int main()
     {
         cin >> a[i];
     }
-    int *b;
-    b = removeDuplicates(a, n);
-    for (int i = 0; i < n; i++)
-    {
-        cout << b[i] << " ";
-    }
-    delete[] b;
+    removeDuplicates(a, n);
+    delete[] a;
 }
