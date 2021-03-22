@@ -291,6 +291,41 @@ public:
         return arr3;
     }
 
+    void unionArrAlt(Array &arr2)
+    {
+        int i, j = 0;
+        while (i < length && j < arr2.getLength())
+        {
+            if (A[i] < arr2.get(j))
+            {
+                cout << A[i] << " ";
+                i++;
+            }
+            else if (A[i] > arr2.get(j))
+            {
+                cout << arr2.get(j) << " ";
+                j++;
+            }
+            else
+            {
+                cout << A[i] << " ";
+                i++;
+                j++;
+            }
+        }
+
+        while (i < length)
+        {
+            cout << A[i] << " ";
+            i++;
+        }
+        while (j < arr2.getLength())
+        {
+            cout << arr2.get(j) << " ";
+            j++;
+        }
+    }
+
     Array intersectionArr(Array &arr2)
     {
         Array arr3(2 * (length + arr2.getLength()), length + arr2.getLength());
@@ -303,6 +338,28 @@ public:
             }
         }
         return arr3;
+    }
+
+    void intersectionArrAlt(Array &arr2)
+    {
+        int i, j = 0;
+        while (i < length && j < arr2.getLength())
+        {
+            if (A[i] < arr2.get(j))
+            {
+                i++;
+            }
+            else if (A[i] > arr2.get(j))
+            {
+                j++;
+            }
+            else
+            {
+                cout << A[i] << " ";
+                i++;
+                j++;
+            }
+        }
     }
 
     ~Array()
@@ -331,7 +388,7 @@ int main()
     arr2.display();
     // Array arr3 = arr.mergeArray(arr2);
     // Array arr3 = arr.unionArr(arr2);
-    Array arr3 = arr.intersectionArr(arr2);
-
-    arr3.display();
+    // Array arr3 = arr.intersectionArr(arr2);
+    // arr3.display();
+    arr.unionArrAlt(arr2);
 }
