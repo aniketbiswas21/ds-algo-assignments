@@ -8,6 +8,7 @@ public:
     Node *next;
 };
 
+// * Q4(ix)
 void circularAppend(Node **n, int value)
 {
     Node *head = *n;
@@ -30,6 +31,7 @@ void circularAppend(Node **n, int value)
     }
 }
 
+// * Q4(ix)
 void displayCircularLinkedList(Node *n)
 {
     Node *temp = n;
