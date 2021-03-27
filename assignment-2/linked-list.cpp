@@ -203,34 +203,47 @@ int main()
 
     n3->data = 3;
     n3->next = NULL;
-    append(&n1, 10);
-    displayLinkedList(n1);
-    countSumNode(n1);
-    cout << "Element found at: " << searchNode(n1, 3) << endl;
-
-    deleteNode(&n1, 3);
+    // append(&n1, 10);
     displayLinkedList(n1);
     cout << endl;
-    cout << isSortedList(n1) << endl;
+    // countSumNode(n1);
+    // cout << "Removing 3: " << endl;
+    // cout << "Element found at: " << searchNode(n1, 3) << endl;
 
-    Node *h1 = new Node();
-    h1->data = 30;
-    h1->next = NULL;
-    append(&h1, 40);
-    append(&h1, 50);
-    append(&h1, 60);
-    append(&h1, 80);
+    // deleteNode(&n1, 3);
+    // displayLinkedList(n1);
 
-    displayLinkedList(h1);
+    // displayLinkedList(n1);
     cout << endl;
+    // if (isSortedList(n1) == 1)
+    // {
+    //     cout << "true" << endl;
+    // }
+    // else
+    // {
+    //     cout << "false" << endl;
+    // }
+    // cout << isSortedList(n1) << endl;
+
+    // Node *h1 = new Node();
+    // h1->data = 30;
+    // h1->next = NULL;
+    // append(&h1, 40);
+    // append(&h1, 50);
+    // append(&h1, 60);
+    // append(&h1, 80);
+
+    // displayLinkedList(h1);
+    // cout << endl;
     // concatenateList(&n1, &h1);
-    displayLinkedList(n1);
+    // cout << "Concated list is as follows: " << endl;
+    // displayLinkedList(n1);
 
-    Node *l1 = mergeList(n1, h1);
-    cout << endl;
-    cout << "Merged list is as follows: " << endl;
-    displayLinkedList(l1);
-    reverseLinkedList(&l1);
-    cout << endl;
-    displayLinkedList(l1);
+    // Node *l1 = mergeList(n1, h1);
+    // cout << endl;
+    // cout << "Merged list is as follows: " << endl;
+    // displayLinkedList(l1);
+    reverseLinkedList(&n1);
+    // cout << endl;
+    displayLinkedList(n1);
 }

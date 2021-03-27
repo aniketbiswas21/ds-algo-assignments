@@ -38,6 +38,23 @@ void display(Node *n)
     }
 }
 
+void reverse(Node **n)
+{
+    Node *temp = NULL;
+    Node *current = *n;
+
+    while (current != NULL)
+    {
+        temp = current->prev;
+        current->prev = current->next;
+        current->next = temp;
+        current = current->prev;
+    }
+
+    if (temp != NULL)
+        *n = temp->prev;
+}
+
 int main()
 {
     Node *n1 = new Node();
@@ -47,5 +64,8 @@ int main()
     insertNode(&n1, 20);
     insertNode(&n1, 30);
     insertNode(&n1, 40);
+    display(n1);
+    reverse(&n1);
+    cout << endl;
     display(n1);
 }

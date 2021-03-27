@@ -32,6 +32,7 @@ public:
             cin >> A[i];
         }
     }
+    // * Q1(i)
     void display()
     {
         for (int i = 0; i < length; i++)
@@ -46,6 +47,7 @@ public:
         return length;
     }
 
+    // * Q1(ii)
     void append(int value)
     {
         if (size <= length)
@@ -59,6 +61,7 @@ public:
         }
     }
 
+    // * Q1(iii)
     void insert(int index, int value)
     {
         if (index < 0 || index > length)
@@ -76,6 +79,7 @@ public:
         }
     }
 
+    // * Q1(iv)
     void deleteIndex(int index)
     {
         if (index > length || index < 0)
@@ -92,6 +96,7 @@ public:
         }
     }
 
+    // * Q1(v)
     void linearSearch(int value)
     {
         for (int i = 0; i < length; i++)
@@ -105,6 +110,7 @@ public:
         cout << "Does not exist" << endl;
     }
 
+    // * Q1(vi)
     void binarySearch(int value)
     {
         int low = 0;
@@ -129,8 +135,8 @@ public:
         cout << "Not Found" << endl;
     }
 
-    int checkItem(int value)
     //  * created as a utility function, functionality same as linear search
+    int checkItem(int value)
     {
         for (int i = 0; i < length; i++)
         {
@@ -141,7 +147,7 @@ public:
         }
         return -1;
     }
-
+    // * Q1(vii)
     int get(int index)
     {
         if (index > length || index < 0)
@@ -152,6 +158,7 @@ public:
         return A[index];
     }
 
+    // * Q1(viii)
     void set(int index, int value)
     {
         if (index > length || index < 0)
@@ -163,7 +170,7 @@ public:
             A[index] = value;
         }
     }
-
+    // * Q1(ix)
     int max()
     {
         int m = A[0];
@@ -176,7 +183,7 @@ public:
         }
         return m;
     }
-
+    // * Q1(x)
     int min()
     {
         int m = A[0];
@@ -189,7 +196,7 @@ public:
         }
         return m;
     }
-
+    // * Q1(xi)
     void reverseArray()
     {
         int *B = new int[length];
@@ -203,7 +210,7 @@ public:
         }
         delete[] B;
     }
-
+    // * Q1(xiii)
     void rotate()
     {
         int *b = new int[length];
@@ -224,7 +231,7 @@ public:
         }
         delete[] b;
     }
-
+    // * Q1(xii)
     void shift()
     {
         int *b = new int[length];
@@ -246,122 +253,6 @@ public:
         delete[] b;
     }
 
-    bool isArraySorted()
-    {
-        for (int i = 0; i < length - 1; i++)
-        {
-            if (A[i] > A[i + 1])
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    Array mergeArray(Array &arr2)
-    {
-        Array arr3(2 * (length + arr2.getLength()), length + arr2.getLength());
-        int j = 0;
-        for (int i = 0; i < length; i++)
-        {
-            arr3.set(j++, A[i]);
-        }
-        for (int k = 0; k < arr2.getLength(); k++)
-        {
-            arr3.set(j++, arr2.get(k));
-        }
-        return arr3;
-    }
-
-    Array unionArr(Array &arr2)
-    {
-        Array arr3(2 * (length + arr2.getLength()), length + arr2.getLength());
-        int j = 0;
-        for (int i = 0; i < length; i++)
-        {
-            arr3.set(j++, A[i]);
-        }
-        for (int i = 0; i < arr2.getLength(); i++)
-        {
-            if (arr3.checkItem(arr2.get(i)) == -1)
-            {
-                arr3.set(j++, arr2.get(i));
-            }
-        }
-        return arr3;
-    }
-
-    void unionArrAlt(Array &arr2)
-    {
-        int i, j = 0;
-        while (i < length && j < arr2.getLength())
-        {
-            if (A[i] < arr2.get(j))
-            {
-                cout << A[i] << " ";
-                i++;
-            }
-            else if (A[i] > arr2.get(j))
-            {
-                cout << arr2.get(j) << " ";
-                j++;
-            }
-            else
-            {
-                cout << A[i] << " ";
-                i++;
-                j++;
-            }
-        }
-
-        while (i < length)
-        {
-            cout << A[i] << " ";
-            i++;
-        }
-        while (j < arr2.getLength())
-        {
-            cout << arr2.get(j) << " ";
-            j++;
-        }
-    }
-
-    Array intersectionArr(Array &arr2)
-    {
-        Array arr3(2 * (length + arr2.getLength()), length + arr2.getLength());
-        int j = 0;
-        for (int i = 0; i < length; i++)
-        {
-            if (arr2.checkItem(A[i]) != -1)
-            {
-                arr3.set(j++, A[i]);
-            }
-        }
-        return arr3;
-    }
-
-    void intersectionArrAlt(Array &arr2)
-    {
-        int i, j = 0;
-        while (i < length && j < arr2.getLength())
-        {
-            if (A[i] < arr2.get(j))
-            {
-                i++;
-            }
-            else if (A[i] > arr2.get(j))
-            {
-                j++;
-            }
-            else
-            {
-                cout << A[i] << " ";
-                i++;
-                j++;
-            }
-        }
-    }
-
     ~Array()
     {
         delete[] A;
@@ -373,8 +264,13 @@ int main()
 {
     Array arr(10);
     arr.create();
+    cout << "The initial array: " << endl;
     arr.display();
-    // arr.append(20);
+    // cout << "The element at index 2 is:" << arr.get(2);
+    // cout << "The min elem is:" << arr.min();
+    arr.rotate();
+    arr.display();
+
     // arr.insert(2, 100);
     // arr.deleteIndex(3);
     // arr.linearSearch(4);
@@ -383,12 +279,7 @@ int main()
     // arr.set(1, 3);
     // arr.reverseArray();
     // arr.shift();
-    Array arr2(10);
-    arr2.create();
-    arr2.display();
-    // Array arr3 = arr.mergeArray(arr2);
-    // Array arr3 = arr.unionArr(arr2);
-    // Array arr3 = arr.intersectionArr(arr2);
-    // arr3.display();
-    arr.unionArrAlt(arr2);
+    // Array arr2(10);
+    // arr2.create();
+    // arr2.display();
 }
