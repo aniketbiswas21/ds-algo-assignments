@@ -29,7 +29,7 @@ void toLowerCase(string &str)
 void vowelsWords(string str)
 {
     int vowels = 0;
-    int words = 1; // if you are keeping this 0 then for 2 words it is printing 1 i.e it is counting whitespace between words and returning that. 
+    int words = 0;
     for (int i = 0; str[i] != '\0'; i++)
     {
         if (str[i] == 'A' || str[i] == 'E' || str[i] == 'I' || str[i] == 'O' || str[i] == 'U')
