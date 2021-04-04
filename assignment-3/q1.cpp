@@ -40,12 +40,16 @@ void vowelsWords(string str)
         {
             vowels++;
         }
-        else if ((str[i] >= 65 && str[i] <= 90) || (str[i] >= 97 && str[i] <= 122))
+    }
+
+    for (int i = 0; str[i] != '\0'; i++)
+    {
+        if (str[i - 1] != ' ' && str[i] == ' ')
         {
             words++;
         }
     }
-    cout << "Total number of words: " << words << endl;
+    cout << "Total number of words: " << words + 1 << endl;
     cout << "Total number of vowels: " << vowels << endl;
 }
 
@@ -77,6 +81,7 @@ void reverseString(string &str)
     {
         s[i] = str[j--];
     }
+    s[l] = '\0';
     str = s;
 }
 
@@ -89,7 +94,6 @@ void palindrome(string str)
     cout << j << endl;
     while (i < j)
     {
-        cout << str[i] << "comparing" << str[j] << endl;
         if (str[i] != str[j])
         {
             cout << "Not a paindrome" << endl;
@@ -101,17 +105,41 @@ void palindrome(string str)
     cout << "The given string is a palindrome" << endl;
 }
 
+// *Q1(vii)
+void stringDuplicates(string s)
+{
+    toLowerCase(s);
+    long int h = 0;
+    long int l = 0;
+    for (int i = 0; s[i] != '\0'; i++)
+    {
+        l = 1;
+        int index = s[i] - 97;
+        l = l << index;
+        if ((l & h) > 0)
+        {
+            cout << s[i] << " repeats " << endl;
+        }
+        else
+        {
+            h = l | h;
+        }
+    }
+}
+
 int main()
 {
     string s;
     cout << "Enter a string: ";
-    cin >> s;
+    getline(cin, s);
+    // cin >> s;
     cout << "The length of the string is: " << lengthFun(s) << endl;
     toLowerCase(s);
     cout << s << endl;
-    vowelsWords(s);
     isValid(s);
-    // reverseString(s);
+    reverseString(s);
     cout << s << endl;
     palindrome(s);
+    stringDuplicates(s);
+    vowelsWords(s);
 }
