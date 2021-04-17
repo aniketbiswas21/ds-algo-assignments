@@ -28,24 +28,16 @@ public:
         top++;
     }
 
-    // * Q1(v)
-    // * Display the topmost element in stack
-    int peek()
+    // * Q1(ii)
+    // * Popping an element from the very end of the stack
+    void pop()
     {
-        if (top < 0)
+        if (top == -1)
         {
-            return -1;
+            cout << "Cannot pop from an empty stack" << endl;
+            return;
         }
-        return A[top];
-    }
-
-    // * Display the stack
-    void display()
-    {
-        for (int i = 0; i <= top; i++)
-        {
-            cout << A[i] << " ";
-        }
+        top--;
     }
 
     // * Q1(iii)
@@ -69,6 +61,47 @@ public:
         }
         return false;
     }
+
+    // * Q1(v)
+    // * Displays an element with index respect to top
+    // * Eg: peek(2) => displays the 2nd index from the top. Considering top as the 0th index
+    int peek(int index)
+    {
+        if (top < 0)
+        {
+            cout << "Cannot peek onto an empty stack" << endl;
+            return -1;
+        }
+        int findIndex = top - index;
+        for (int i = 0; i < top; i++)
+        {
+            if (i == findIndex)
+            {
+                return A[i];
+            }
+        }
+        return -1;
+    }
+
+    // * Q1(vi)
+    // * Display the topmost element in stack
+    int stackTop()
+    {
+        if (top < 0)
+        {
+            return -1;
+        }
+        return A[top];
+    }
+
+    // * Display the stack
+    void display()
+    {
+        for (int i = 0; i <= top; i++)
+        {
+            cout << A[i] << " ";
+        }
+    }
 };
 
 int main()
@@ -80,7 +113,7 @@ int main()
     s.push(4);
     s.push(5);
 
-    cout << s.peek() << endl;
+    cout << s.stackTop() << endl;
     s.display();
     cout << endl;
     if (s.isFull() == true)
@@ -100,4 +133,8 @@ int main()
     {
         cout << "The stack is not empty" << endl;
     }
+    s.pop();
+    s.display();
+    cout << endl;
+    cout << s.peek(3) << endl;
 }
