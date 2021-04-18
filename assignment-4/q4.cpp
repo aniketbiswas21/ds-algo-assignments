@@ -159,13 +159,6 @@ int main()
 {
     Stack front(10);
     Stack rear(10);
-    // enqueue(&front, 1);
-    // enqueue(&front, 2);
-    // enqueue(&front, 3);
-    // displayQueue(front);
-    // cout << endl;
-    // cout << "Removing: " << dequeue(&front, &rear) << endl;
-    // displayQueue(front);
     int ch;
     int ans = 1;
     do
