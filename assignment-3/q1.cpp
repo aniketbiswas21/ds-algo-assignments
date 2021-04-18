@@ -91,7 +91,6 @@ void palindrome(string str)
     int i = 0;
     int l = lengthFun(str);
     int j = l - 1;
-    cout << j << endl;
     while (i < j)
     {
         if (str[i] != str[j])
@@ -133,13 +132,13 @@ int main()
     cout << "Enter a string: ";
     getline(cin, s);
     // cin >> s;
-    cout << "The length of the string is: " << lengthFun(s) << endl;
-    toLowerCase(s);
-    cout << s << endl;
-    isValid(s);
-    reverseString(s);
-    cout << s << endl;
-    palindrome(s);
+    // cout << "The length of the string is: " << lengthFun(s) << endl;
+    // toLowerCase(s);
+    // cout << s << endl;
+    // isValid(s);
+    // reverseString(s);
+    // cout << s << endl;
+    // palindrome(s);
     stringDuplicates(s);
-    vowelsWords(s);
+    // vowelsWords(s);
 }
