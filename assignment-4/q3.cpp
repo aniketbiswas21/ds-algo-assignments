@@ -90,18 +90,62 @@ public:
 int main()
 {
 
-    //  TODO Add a menu driven program
     Queue q(10);
-    q.enqueue(1);
-    q.enqueue(2);
-    q.enqueue(3);
-    q.display();
-    q.dequeue();
-    cout << endl;
-    q.display();
-    cout << endl;
-    if (q.isEmpty() == false)
+    int ch;
+    int ans = 1;
+    do
     {
-        cout << "Not empty";
-    }
+        cout << "--Menu--" << endl;
+        cout << "1.Enqueue" << endl;
+        cout << "2.Dequeue" << endl;
+        cout << "3.isFull" << endl;
+        cout << "4.isEmpty" << endl;
+        cout << "5.Display" << endl;
+        cout << "6.Exit" << endl;
+        cout << "Enter your choice: " << endl;
+        cin >> ch;
+
+        switch (ch)
+        {
+        case 1:
+            int num;
+            cout << "Enter a number to insert" << endl;
+            cin >> num;
+            q.enqueue(num);
+            break;
+        case 2:
+            q.dequeue();
+            break;
+        case 3:
+            if (q.isFull() == true)
+            {
+                cout << "The queue is full" << endl;
+            }
+            else
+            {
+                cout << "The queue is not full" << endl;
+            }
+            break;
+        case 4:
+            if (q.isEmpty() == true)
+            {
+                cout << "The queue is empty" << endl;
+            }
+            else
+            {
+                cout << "The queue is not empty" << endl;
+            }
+            break;
+        case 5:
+            q.display();
+            cout << endl;
+            break;
+        case 6:
+            ans = 0;
+            break;
+        default:
+            cout << "Please enter a valid option" << endl;
+            break;
+        }
+    } while (ans == 1);
 }
