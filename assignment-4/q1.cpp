@@ -95,10 +95,9 @@ public:
     }
 
     // * Display the stack
-    // TODO Fix this
     void display()
     {
-        for (int i = 0; i <= top; i++)
+        for (int i = top; i >= 0; i--)
         {
             cout << A[i] << " ";
         }
