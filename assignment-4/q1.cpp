@@ -73,7 +73,7 @@ public:
             return -1;
         }
         int findIndex = top - index;
-        for (int i = 0; i < top; i++)
+        for (int i = 0; i <= top; i++)
         {
             if (i == findIndex)
             {
@@ -107,37 +107,6 @@ public:
 int main()
 {
     class Stack s;
-    // s.push(1);
-    // s.push(2);
-    // s.push(3);
-    // s.push(4);
-    // s.push(5);
-
-    // cout << s.stackTop() << endl;
-    // s.display();
-    // cout << endl;
-    // if (s.isFull() == true)
-    // {
-    //     cout << "The stack is full" << endl;
-    // }
-    // else
-    // {
-    //     cout << "The stack is not full" << endl;
-    // }
-
-    // if (s.isEmpty() == true)
-    // {
-    //     cout << "The stack is empty" << endl;
-    // }
-    // else
-    // {
-    //     cout << "The stack is not empty" << endl;
-    // }
-    // s.pop();
-    // s.display();
-    // cout << endl;
-    // cout << s.peek(3) << endl;
-
     int ch;
     int ans = 1;
     do
@@ -193,7 +162,7 @@ int main()
             cout << endl;
             break;
         case 6:
-            s.stackTop();
+            cout << s.stackTop();
             cout << endl;
             break;
         case 7:

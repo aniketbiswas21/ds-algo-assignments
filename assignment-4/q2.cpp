@@ -41,6 +41,17 @@ public:
         delete temp;
     }
 
+    // * Q1(iii)
+    // * Checks if the stack is full or not
+    bool isFull(int l)
+    {
+        if (l >= max)
+        {
+            return true;
+        }
+        return false;
+    }
+
     // * Q1(iv)
     // * Check if a stack is empty or not
     bool isEmpty()
@@ -73,26 +84,84 @@ public:
             n = n->next;
         }
     }
+
+    // * Length of the stack
+    int length()
+    {
+        Node *n = top;
+        int l;
+        while (n != NULL)
+        {
+            l++;
+            n = n->next;
+        }
+        return l;
+    }
 };
 
 int main()
 {
     class Stack s;
-    s.push(1);
-    s.push(2);
-    s.push(3);
-    s.display();
-    s.pop();
-    cout << endl;
-    s.display();
-    cout << endl;
-    if (s.isEmpty() == true)
+    int ch;
+    int ans = 1;
+    do
     {
-        cout << "The stack is empty" << endl;
-    }
-    else
-    {
-        cout << "The stack is not empty" << endl;
-    }
-    cout << s.peek() << endl;
+        cout << "--Menu--" << endl;
+        cout << "1.Push" << endl;
+        cout << "2.Pop" << endl;
+        cout << "3.isFull" << endl;
+        cout << "4.isEmpty" << endl;
+        cout << "5.Peek" << endl;
+        cout << "6.Display" << endl;
+        cout << "7.Exit" << endl;
+        cout << "Enter your choice: " << endl;
+        cin >> ch;
+
+        switch (ch)
+        {
+        case 1:
+            int num;
+            cout << "Enter a number to insert" << endl;
+            cin >> num;
+            s.push(num);
+            break;
+        case 2:
+            s.pop();
+            break;
+        case 3:
+            if (s.isFull(s.length()) == true)
+            {
+                cout << "The stack is full" << endl;
+            }
+            else
+            {
+                cout << "The stack is not full" << endl;
+            }
+            break;
+        case 4:
+            if (s.isEmpty() == true)
+            {
+                cout << "The stack is empty" << endl;
+            }
+            else
+            {
+                cout << "The stack is not empty" << endl;
+            }
+            break;
+        case 5:
+            cout << s.peek();
+            cout << endl;
+            break;
+        case 6:
+            s.display();
+            cout << endl;
+            break;
+        case 7:
+            ans = 0;
+            break;
+        default:
+            cout << "Please enter a valid option" << endl;
+            break;
+        }
+    } while (ans == 1);
 }
