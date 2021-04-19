@@ -73,12 +73,9 @@ public:
             return -1;
         }
         int findIndex = top - index;
-        for (int i = 0; i <= top; i++)
+        if (findIndex > 0)
         {
-            if (i == findIndex)
-            {
-                return A[i];
-            }
+            return A[findIndex];
         }
         return -1;
     }

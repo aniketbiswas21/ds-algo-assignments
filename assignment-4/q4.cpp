@@ -19,24 +19,36 @@ public:
     // * Pushing an element at the very end of a stack
     void push(int value)
     {
-        if (top >= max - 1)
+        try
+        {
+            if (top >= max - 1)
+            {
+                throw -1;
+            }
+            A[top + 1] = value;
+            top++;
+        }
+        catch (int x)
         {
             cout << "Stack is full, cannot push anymore elements" << endl;
-            return;
         }
-        A[top + 1] = value;
-        top++;
     }
 
     // * Popping an element from the very end of the stack
     void pop()
     {
-        if (top == -1)
+        try
+        {
+            if (top == -1)
+            {
+                throw -1;
+            }
+            top--;
+        }
+        catch (int x)
         {
             cout << "Cannot pop from an empty stack" << endl;
-            return;
         }
-        top--;
     }
 
     // * Check if a stack is full
@@ -99,35 +111,42 @@ void enqueue(Stack *s, int value)
 // * Removes an element from a queue
 int dequeue(Stack *front, Stack *rear)
 {
-    if (front->isEmpty() && rear->isEmpty())
+    try
+    {
+        if (front->isEmpty() && rear->isEmpty())
+        {
+            throw -1;
+        }
+
+        // * Moving all elements from front stack to rear stack
+        if (rear->isEmpty())
+        {
+            while (!front->isEmpty())
+            {
+                rear->push(front->stackTop());
+                front->pop();
+            }
+        }
+        // * Capturing and popping the topmost element from rear stack
+        int y = rear->stackTop();
+        rear->pop();
+
+        // * After popping, moving all the elements back to front stack from rear stack
+        if (front->isEmpty())
+        {
+            while (!rear->isEmpty())
+            {
+                front->push(rear->stackTop());
+                rear->pop();
+            }
+        }
+        return y;
+    }
+    catch (int x)
     {
         cout << "Queue is empty" << endl;
         return -1;
     }
-
-    // * Moving all elements from front stack to rear stack
-    if (rear->isEmpty())
-    {
-        while (!front->isEmpty())
-        {
-            rear->push(front->stackTop());
-            front->pop();
-        }
-    }
-    // * Capturing and popping the topmost element from rear stack
-    int y = rear->stackTop();
-    rear->pop();
-
-    // * After popping, moving all the elements back to front stack from rear stack
-    if (front->isEmpty())
-    {
-        while (!rear->isEmpty())
-        {
-            front->push(rear->stackTop());
-            rear->pop();
-        }
-    }
-    return y;
 }
 
 // * Q4(iii)
