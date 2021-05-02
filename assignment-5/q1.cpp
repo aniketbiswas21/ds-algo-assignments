@@ -19,10 +19,14 @@ int max(int *arr, int w)
 vector<int> slidingWindow(int *A, int l, int w)
 {
     vector<int> res;
+    int window[w];
     for (int i = 0; i <= l - w; i++)
     {
-
-        int window[] = {A[i], A[i + 1], A[i + 2]};
+        int k = i;
+        for (int j = 0; j < w; j++)
+        {
+            window[j] = A[k++];
+        }
         int t = max(window, w);
         res.push_back(t);
     }
@@ -44,6 +48,7 @@ int main()
     }
     vector<int> result;
     result = slidingWindow(A, n, w);
+    cout << "The answer is: " << endl;
     for (auto i = result.begin(); i != result.end(); ++i)
     {
         cout << *i << " ";
