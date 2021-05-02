@@ -184,6 +184,75 @@ void reverseLinkedList(Node **n)
     *n = prev;
 }
 
+void deleteNode(Node **n, int index)
+{
+
+    Node *temp = *n;
+    Node *prev = NULL;
+    int count = 0;
+
+    if (temp != NULL && count == index)
+    {
+        *n = temp->next;
+        delete temp;
+        return;
+    }
+
+    else
+    {
+        while (temp != NULL)
+        {
+            if (count == index)
+            {
+                break;
+            }
+            prev = temp;
+            temp = temp->next;
+            count++;
+        }
+        if (temp == NULL)
+        {
+            return;
+        }
+        prev->next = temp->next;
+        delete temp;
+    }
+}
+
+void insertNode(Node **n, int index, int value)
+{
+    Node *new_node = new Node();
+    Node *temp = *n;
+    if (n == NULL)
+    {
+        return;
+    }
+    else if (index == 0)
+    {
+        new_node->data = value;
+        new_node->next = temp;
+        *n = new_node;
+    }
+    else
+    {
+        Node *prev = NULL;
+        int current = 0;
+        while (temp != NULL)
+        {
+            if (current == index)
+            {
+                break;
+            }
+            prev = temp;
+            temp = temp->next;
+            current++;
+        }
+        new_node->data = value;
+        prev->next = new_node;
+        new_node->next = temp;
+    }
+}
+
 int main()
 {
     Node *n1;

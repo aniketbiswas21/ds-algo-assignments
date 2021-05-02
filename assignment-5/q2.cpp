@@ -1,27 +1,24 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
-
-class Node
+struct Node
 {
-public:
     int data;
-    Node *next;
+    struct Node *next;
 };
 
-// * Displays the linked list
-void displayLinkedList(Node *n)
+// * Creates a new node
+Node *newNode(int key)
 {
-    while (n != NULL)
-    {
-        cout << n->data << " ";
-        n = n->next;
-    }
+    Node *temp = new Node;
+    temp->data = key;
+    temp->next = NULL;
+    return temp;
 }
 
-// * Adds a node to the end of the linked list
+// * adds a node to the very end of the linked list
 void append(Node **n, int value)
 {
-    Node *new_node = new Node();
+    Node *new_node = new Node;
     if (*n == NULL)
     {
         new_node->data = value;
@@ -39,101 +36,92 @@ void append(Node **n, int value)
     head->next = new_node;
 }
 
-// * Replaces the nodes position in between two indices i.e. source and destination
-void replaceNode(Node **n, int source, int destination)
+// * Reverses a linked list
+void reverselist(Node **n)
 {
-    Node *sourceNode = *n;
-    Node *destinationNode = *n;
-    Node *temp = NULL;
-    Node *prevSource = NULL;
-    Node *prevDestination = NULL;
-    int count = 0;
-    int count2 = 0;
-    while (sourceNode != NULL)
+    Node *prev = NULL, *curr = *n, *next;
+
+    while (curr)
     {
-        if (count == source)
-        {
-            break;
-        }
-        prevSource = sourceNode;
-        sourceNode = sourceNode->next;
-        count++;
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
     }
 
-    while (destinationNode != NULL)
-    {
-        if (count2 == destination)
-        {
-            break;
-        }
-        prevDestination = destinationNode;
-        destinationNode = destinationNode->next;
-        count2++;
-    }
-
-    if (sourceNode == NULL || destinationNode == NULL)
-    {
-        return;
-    }
-
-    if (prevSource != NULL)
-    {
-        prevSource->next = destinationNode;
-    }
-    else
-    {
-        *n = destinationNode;
-    }
-
-    if (prevDestination != NULL)
-    {
-        prevDestination->next = sourceNode;
-    }
-    else
-    {
-        *n = sourceNode;
-    }
-    Node *t = sourceNode->next;
-    sourceNode->next = destinationNode->next;
-    destinationNode->next = t;
+    *n = prev;
 }
 
-// * Returns the current length of the linked list
-int length(Node *n)
+// * displays the linked list
+void displayList(Node *n)
 {
-    int l = 0;
     while (n != NULL)
     {
-        l++;
+        cout << n->data << " ";
+        if (n->next)
+            cout << "-> ";
         n = n->next;
     }
-    return l;
+    cout << endl;
 }
 
-// * Transforms the list to the form of 0 being replaced by n
-void transformList(Node **n)
+// * Transforma a Linked List to the form of {A1, An, A2, An-1...}
+void transform(Node **n)
 {
-    int l = length(*n);
-    int startIndex = 0;
-    int endIndex = l - 1;
-    while (startIndex < endIndex)
+    //  * Finding the middle point of the linked list so as to break it in two lists
+    Node *slow = *n, *fast = slow->next;
+    while (fast && fast->next)
     {
-        replaceNode(n, startIndex++, endIndex--);
+        slow = slow->next;
+        fast = fast->next->next;
     }
+
+    // * Splits the list
+    Node *head1 = *n;
+    Node *head2 = slow->next;
+    slow->next = NULL;
+
+    // * Reverses list 2
+    reverselist(&head2);
+
+    *n = newNode(0);
+
+    Node *curr = *n;
+    // * Merge elements from the two lists in alternate manner
+    while (head1 || head2)
+    {
+        // * adds a element from list1
+        if (head1)
+        {
+            curr->next = head1;
+            curr = curr->next;
+            head1 = head1->next;
+        }
+
+        // * adds a element from list2
+        if (head2)
+        {
+            curr->next = head2;
+            curr = curr->next;
+            head2 = head2->next;
+        }
+    }
+
+    // * Assign the head of the new list generated to head pointer
+    *n = (*n)->next;
 }
 
 int main()
 {
-    Node *n = new Node();
-    n->data = 0;
-    n->next = NULL;
-    append(&n, 1);
-    append(&n, 2);
-    append(&n, 3);
-    append(&n, 4);
-    displayLinkedList(n);
-    cout << endl;
-    transformList(&n);
-    cout << "After transforming the list: " << endl;
-    displayLinkedList(n);
+    Node *head = newNode(12);
+    append(&head, 24);
+    append(&head, 36);
+    append(&head, 48);
+    append(&head, 60);
+    cout << "The original list is: " << endl;
+    displayList(head);
+    cout << "Modified list is: " << endl;
+    transform(&head);
+    displayList(head);
+    return 0;
 }
