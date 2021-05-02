@@ -30,6 +30,10 @@ string convertToPostfix(string s)
     string output;
     for (int i = 0; s[i] != '\0'; i++)
     {
+        if (s[i] == ' ')
+        {
+            continue;
+        }
         if (!isOperator(s[i]))
         {
             output += s[i];

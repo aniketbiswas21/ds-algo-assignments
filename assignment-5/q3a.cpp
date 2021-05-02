@@ -117,5 +117,5 @@ int main()
     string input;
     cout << "Enter a postfix expression" << endl;
     getline(cin, input);
-    cout << evaluate(input) << endl;
+    cout << "The answer is: " << evaluate(input) << endl;
 }
