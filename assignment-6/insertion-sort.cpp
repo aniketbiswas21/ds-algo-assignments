@@ -24,8 +24,10 @@ void insertionSort(int *a, int l)
 int main()
 {
     int n;
+    cout << "Enter the size of array" << endl;
     cin >> n;
     int *a = new int[n];
+    cout << "Enter the elements of array" << endl;
     for (int i = 0; i < n; i++)
     {
         cin >> a[i];

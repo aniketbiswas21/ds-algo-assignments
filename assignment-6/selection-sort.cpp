@@ -10,31 +10,22 @@ void swap(int *i, int *j)
     *j = temp;
 }
 
-// * Sorts the incoming array in ascending order by making use of bubble sort
-void bubbleSort(int *a, int l)
+// * Sorts the incoming array in ascending order by making use of selection sort
+void selectionSort(int *a, int l)
 {
-    bool notSwaped = 0;
     for (int i = 0; i < l - 1; i++)
     {
-        notSwaped = 0;
-        // * If no swapping took place in the inner loop that implies that the given array was already sorted therefore terminating the loop there and then
-        if (notSwaped)
+        // * Finding the smallest element in the remaining array
+        int min_indx = i;
+        for (int j = i + 1; j < l; j++)
         {
-            break;
-        }
-        for (int j = 0; j < l - i - 1; j++)
-        {
-            if (a[j] > a[j + 1])
+            if (a[min_indx] > a[j])
             {
-                swap(&a[j], &a[j + 1]);
-                notSwaped = 0;
-            }
-            else
-            {
-
-                notSwaped = 1;
+                min_indx = j;
             }
         }
+        // * Swapping the min element and the current element
+        swap(&a[min_indx], &a[i]);
     }
 }
 
@@ -55,7 +46,7 @@ int main()
         cout << a[i] << " ";
     }
     cout << endl;
-    bubbleSort(a, n);
+    selectionSort(a, n);
     cout << "The sorted array is: " << endl;
     for (int i = 0; i < n; i++)
     {
