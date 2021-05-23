@@ -1,4 +1,3 @@
-// TODO
 #include <iostream>
 using namespace std;
 
@@ -9,108 +8,86 @@ public:
     Node *next;
 };
 
-// * Utility function to add a node to the very end of the linked list
-void append(Node **n, int value)
+class list
 {
-    Node *new_node = new Node();
-    if (*n == NULL)
-    {
-        new_node->data = value;
-        new_node->next = NULL;
-        *n = new_node;
-        return;
-    }
-    new_node->data = value;
-    new_node->next = NULL;
-    Node *head = *n;
-    while (head->next != NULL)
-    {
-        head = head->next;
-    }
-    head->next = new_node;
-}
+    Node *head;
 
-void displayLinkedList(Node *n)
-{
-    while (n != NULL)
+public:
+    list()
     {
-        cout << n->data << " ";
-        n = n->next;
+        head = NULL;
     }
-}
 
-void insertNode(Node **n, int index, int value)
-{
-    Node *new_node = new Node();
-    Node *temp = *n;
-    if (n == NULL)
+    void add(int el)
     {
-        return;
+        Node *newNode = new Node();
+
+        newNode->data = el;
+        newNode->next = NULL;
+
+        if (head == NULL)
+        {
+            head = newNode;
+        }
+        else
+        {
+            Node *temp = head;
+
+            while (temp->next != NULL)
+            {
+                temp = temp->next;
+            }
+            temp->next = newNode;
+        }
     }
-    else if (index == 0)
+
+    // * Sorts the incoming array in ascending order by making use of insertion sort
+    void insertionSort()
     {
-        new_node->data = value;
-        new_node->next = temp;
-        *n = new_node;
+        Node *i = head->next;
+
+        while (i != NULL)
+        {
+            Node *key = i;
+            Node *j = head;
+
+            while (j != i)
+            {
+                if (key->data < j->data)
+                {
+                    int temp = key->data;
+                    key->data = j->data;
+                    j->data = temp;
+                }
+                j = j->next;
+            }
+            i = i->next;
+        }
     }
-    else
+
+    void display()
     {
-        Node *prev = NULL;
-        int current = 0;
+        Node *temp = head;
+
         while (temp != NULL)
         {
-            if (current == index)
-            {
-                break;
-            }
-            prev = temp;
+            cout << temp->data << " ";
             temp = temp->next;
-            current++;
-        }
-        new_node->data = value;
-        prev->next = new_node;
-        new_node->next = temp;
-    }
-}
-
-Node *insertionSort(Node *n)
-{
-    Node *sorted = new Node();
-    Node *sortedHead = sorted;
-    int index = 0;
-    while (n != NULL)
-    {
-        index = 0;
-        sorted = sortedHead;
-        if (!sorted)
-        {
-            append(&sorted, n->data);
-        }
-        while (sorted != NULL)
-        {
-            if (n < sorted)
-            {
-                insertNode(&sorted, index - 1, n->data);
-            }
-            else if (n > sorted)
-            {
-                sorted = sorted->next;
-            }
         }
     }
-
-    return sorted;
-}
+};
 
 int main()
 {
-    Node *n = new Node();
-    append(&n, 1);
-    append(&n, 3);
-    append(&n, 2);
-    append(&n, 6);
-    append(&n, 5);
-    displayLinkedList(n);
-    Node *sortedList = insertionSort(n);
-    displayLinkedList(sortedList);
+    list l;
+    l.add(21);
+    l.add(11);
+    l.add(0);
+    l.add(3);
+    l.add(70);
+    l.add(42);
+
+    l.insertionSort();
+    cout << "The sorted list is: " << endl;
+    l.display();
 }
