@@ -16,38 +16,49 @@ int max(int *a, int n)
 }
 
 // * Sorts the incoming array in ascending order by making use of count sort
-void countSort(int *a, int n)
+void countSort(int *a, int n, int e)
 {
-    int max_inx = max(a, n);
-    int *b = new int[max_inx + 1];
+    int *b = new int[n];
+    int count[10] = {0};
+    int i;
 
-    // * assigning zero to all the elements of the new array
-    for (int i = 0; i <= max_inx; i++)
+    // * assigning zero to all the elements of the output array
+    for (i = 0; i < n; i++)
     {
         b[i] = 0;
     }
 
-    // * incrementing the values at position where element exists in the original array
-    for (int i = 0; i < n; i++)
+        for (i = 0; i < n; i++)
     {
-        b[a[i]]++;
+        count[(a[i] / e) % 10]++;
     }
-    int i = 0;
-    int j = 0;
 
-    // * Copying back the elements to the original array if the current value in the new array is greater than 1
-    while (i <= max_inx)
+    for (i = 1; i < 10; i++)
     {
-        if (b[i] > 0)
-        {
-            a[j++] = i;
-            b[i]--;
-        }
-        else
-        {
-            i++;
-        }
+        count[i] += count[i - 1];
     }
+
+    for (i = n - 1; i >= 0; i--)
+    {
+        b[count[(a[i] / e) % 10] - 1] = a[i];
+        count[(a[i] / e) % 10]--;
+    }
+
+    for (i = 0; i < n; i++)
+    {
+
+        a[i] = b[i];
+    }
+}
+
+// * Sorts the incoming array in ascending order by making use of radix sort
+void radixSort(int *a, int n)
+{
+    int m = max(a, n);
+
+    // * Perform counting sort based on every digit in the number
+    for (int exp = 1; m / exp > 0; exp *= 10)
+        countSort(a, n, exp);
 }
 
 int main()
@@ -67,7 +78,7 @@ int main()
         cout << a[i] << " ";
     }
     cout << endl;
-    countSort(a, n);
+    radixSort(a, n);
     cout << "The sorted array is: " << endl;
     for (int i = 0; i < n; i++)
     {
