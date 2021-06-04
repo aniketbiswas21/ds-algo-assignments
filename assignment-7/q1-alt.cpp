@@ -1,4 +1,3 @@
-// TODO Delete operation
 // Hashing using chaining
 #include <iostream>
 using namespace std;
