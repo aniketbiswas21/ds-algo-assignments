@@ -87,6 +87,39 @@ public:
         return -1;
     }
 
+    // * Deletes an element from the hash table
+    void Delete(int value)
+    {
+        int hashIndex = hash(value);
+        Node *h = HT[hashIndex];
+        Node *n = NULL;
+
+        // * Return if the element does not exist
+        if (h == NULL)
+        {
+            return;
+        }
+
+        // * If the starting index is to be deleted
+        if (h->data == value)
+        {
+            n = h->next;
+            HT[hashIndex] = n;
+            delete h;
+            return;
+        }
+
+        while (h && h->data != value)
+        {
+            n = h;
+            h = h->next;
+        }
+
+        n->next = h->next;
+        delete h;
+        return;
+    }
+
     // * Displays the Hash Table
     void Display()
     {
@@ -132,7 +165,8 @@ int main()
         cout << "1.Insert" << endl;
         cout << "2.Search" << endl;
         cout << "3.Display" << endl;
-        cout << "4.Exit" << endl;
+        cout << "4.Delete" << endl;
+        cout << "5.Exit" << endl;
         cout << "Enter your choice: " << endl;
         cin >> ch;
 
@@ -163,6 +197,13 @@ int main()
             cout << endl;
             break;
         case 4:
+            int val;
+            cout << "Enter the value to be deleted" << endl;
+            cin >> val;
+            h.Delete(val);
+            cout << endl;
+            break;
+        case 5:
             ans = 0;
             break;
         default:
